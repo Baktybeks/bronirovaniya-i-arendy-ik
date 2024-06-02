@@ -5,9 +5,9 @@ const ApiError = require('../error/ApiError');
 class ApplicationController {
     async create(req, res, next) {
         try {
-            const { email, processed, ServiceId } = req.body;
+            const { name, email, phone, reservation, rent, processed, RentId } = req.body;
             const data = await Application.create({
-                email, processed, ServiceId
+                name, email, phone, reservation, rent, processed, RentId
             });
             return res.json(data);
         } catch(e) {
@@ -41,10 +41,14 @@ class ApplicationController {
     async updateProcessed(req, res, next) {
         try {
             const { id } = req.params;
-            const { processed } = req.body;
+            const { processed, reservation, rent } = req.body;
 
             const updatedApplication = await Application.update(
-                { processed },
+                {
+                    processed,
+                    reservation,
+                    rent
+                },
                 { where: { id } }
             );
 

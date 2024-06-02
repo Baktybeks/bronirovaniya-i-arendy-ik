@@ -9,38 +9,34 @@ const User = sequelize.define('User', {
     role: { type: DataTypes.STRING, defaultValue: 'USER' }
 });
 
-const Application = sequelize.define('Application', {
+const Rent = sequelize.define('Rent', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    email: { type: DataTypes.STRING, allowNull: false },
-    processed: { type: DataTypes.BOOLEAN, defaultValue: false },
-});
-
-const Approach = sequelize.define('Approach', {
-    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    title: { type: DataTypes.STRING, allowNull: false },
     image: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.TEXT, allowNull: false },
+    address: { type: DataTypes.STRING, allowNull: false },
+    price: { type: DataTypes.INTEGER, allowNull: false },
 });
 
 const Review = sequelize.define('Review', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    title: { type: DataTypes.STRING, allowNull: false },
-    image: { type: DataTypes.STRING, allowNull: false },
+    name: { type: DataTypes.STRING, allowNull: false },
+    avatar: { type: DataTypes.STRING, allowNull: false },
     review: { type: DataTypes.STRING, allowNull: false },
 });
 
-const Service = sequelize.define('Service', {
+const Application = sequelize.define('Application', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-    title: { type: DataTypes.STRING, allowNull: false },
-    image: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.TEXT, allowNull: false },
+    phone: { type: DataTypes.STRING, allowNull: false },
+    email: { type: DataTypes.STRING, allowNull: false },
+    processed: { type: DataTypes.BOOLEAN, defaultValue: false },
+    reservation: { type: DataTypes.BOOLEAN, defaultValue: false },
+    rent: { type: DataTypes.BOOLEAN, defaultValue: false },
 });
 
-Service.hasMany(Application);
-Application.belongsTo(Service);
+Rent.hasMany(Application);
+Application.belongsTo(Rent);
 
 module.exports = {
-    User, Service, Review, Approach, Application
+    User, Rent, Review, Application
 };
 
 

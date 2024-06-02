@@ -1,19 +1,19 @@
-const { Service } = require('../models/models');
+const { Rent } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const uuid = require('uuid');
 const path = require('path');
 
 
-class ServiceController {
+class RentController {
     async create(req, res, next) {
         try {
-            const { title, description } = req.body;
+            const { address, price } = req.body;
             const { image } = req.files;
             let fileName = uuid.v4() + '.jpg';
             image.mv(path.resolve(__dirname, '..', 'static', fileName));
-            const data = await Service.create({
-                title,
-                description,
+            const data = await Rent.create({
+                address,
+                price,
                 image: fileName,
             });
             return res.json(data);
@@ -23,22 +23,33 @@ class ServiceController {
     }
 
     async getAll(req, res) {
-        const data = await Service.findAll();
+        const data = await Rent.findAll();
         return res.json(data);
+    }
+
+    async getOne(req, res) {
+        try {
+            const { id } = req.params;
+            const data = await Rent.findOne({ where: { id } });
+            return res.json(data);
+        } catch(error) {
+            console.error('Error:', error);
+            return res.status(500).json({ error: 'Internal Server Error' });
+        }
     }
 
     async deleteOne(req, res, next) {
         try {
             const { id } = req.params;
-            const deleted = await Service.destroy({ where: { id } });
+            const deleted = await Rent.destroy({ where: { id } });
             if (deleted) {
                 return res.json({ message: 'Deleted successfully' });
             }
-            throw new Error('Service not found');
+            throw new Error('Rent not found');
         } catch(e) {
             next(ApiError.badRequest(e.message));
         }
     }
 }
 
-module.exports = new ServiceController();
+module.exports = new RentController();

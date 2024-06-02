@@ -7,12 +7,12 @@ const path = require('path');
 class ReviewController {
     async create(req, res, next) {
         try {
-            const { title, description, review } = req.body;
-            const { image } = req.files;
+            const { name, review } = req.body;
+            const { avatar } = req.files;
             let fileName = uuid.v4() + '.jpg';
-            image.mv(path.resolve(__dirname, '..', 'static', fileName));
+            avatar.mv(path.resolve(__dirname, '..', 'static', fileName));
             const data = await Review.create({
-                title, description, review, image: fileName,
+                name, review, avatar: fileName,
             });
             return res.json(data);
         } catch(e) {
