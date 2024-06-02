@@ -19,37 +19,31 @@ model Users {
 
 model Applications {
   id                Int             @id @default(autoincrement())
+  phone             String
   email             String
   processed         Boolean         @default(false)
-  ServiceId         Int
-  service           Services        @relation(fields: [ServiceId], references: [id])
+  reservation       Boolean         @default(false)
+  rentStatus        Boolean         @default(false)
+  RentId            Int
+  rent              Rents           @relation(fields: [RentId], references: [id])
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 }
 
-model Services {
+model Rents {
   id                Int             @id @default(autoincrement())
-  title             String
+  address           String
+  price             String
   image             String
-  description       String
   application       Applications[]
-  createdAt         DateTime        @default(now())
-  updatedAt         DateTime        @updatedAt
-}
-
-model Approaches {
-  id                Int             @id @default(autoincrement())
-  title             String
-  image             String
-  description       String
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 }
 
 model Reviews {
   id                Int             @id @default(autoincrement())
-  title             String
-  image             String
+  name              String
+  avatar            String
   review            String
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt

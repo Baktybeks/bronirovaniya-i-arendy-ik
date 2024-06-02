@@ -29,7 +29,7 @@ const Application = sequelize.define('Application', {
     email: { type: DataTypes.STRING, allowNull: false },
     processed: { type: DataTypes.BOOLEAN, defaultValue: false },
     reservation: { type: DataTypes.BOOLEAN, defaultValue: false },
-    rent: { type: DataTypes.BOOLEAN, defaultValue: false },
+    rentStatus: { type: DataTypes.BOOLEAN, defaultValue: false },
 });
 
 Rent.hasMany(Application);
