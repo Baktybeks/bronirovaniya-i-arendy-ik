@@ -2,6 +2,7 @@
 
 import React, {useEffect, useState} from 'react';
 import styles from "@/app/styles/admin/Admin.module.scss";
+import Layout from "@/components/layout/Layout";
 
 interface Props {
     processed: boolean;
@@ -67,6 +68,7 @@ const PageApplications = () => {
     };
 
     return (
+        <Layout Header='home' isFooterHidden>
         <div className={styles.wrapperAdmin}>
             <h1 className={styles.nameAdmin}>Заявки пользователей</h1>
             <ul className={styles.blockList}>
@@ -91,6 +93,7 @@ const PageApplications = () => {
                 ))}
             </ul>
         </div>
+        </Layout>
     );
 };
 

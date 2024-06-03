@@ -2,19 +2,13 @@
 
 import React, {useEffect, useState} from 'react';
 import styles from '../styles/admin/Admin.module.scss'
+import Layout from "@/components/layout/Layout";
 
 interface Direction {
     id: string;
-    title: string;
-    author: string;
-    publication_year: string;
-    bestseller: boolean;
-    isNew: boolean;
+    address: string;
     price: string;
-    GenreId: string;
-    discount: boolean;
-    cover_image: string;
-    description: string;
+    image: string;
 }
 
 
@@ -23,26 +17,19 @@ const PageAdmin = () => {
     const [gender, setGender] = useState<any>([]);
     const [newBooks, setNewBooks] = useState<Direction>({
         id: '',
-        title: '',
-        author: '',
-        publication_year: '',
-        bestseller: false,
-        isNew: false,
+        address: '',
         price: '',
-        GenreId: '',
-        discount: false,
-        cover_image: '',
-        description: '',
+        image: '',
     });
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:5000/api/book/');
+            const response = await fetch('http://localhost:5000/api/rent');
             if (!response.ok) {
                 throw new Error('Unable to fetch posts!');
             }
             const jsonData = await response.json();
-            setBooks(jsonData.rows);
+            setBooks(jsonData);
         };
 
         fetchData();
@@ -50,12 +37,12 @@ const PageAdmin = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const response = await fetch('http://localhost:5000/api/genre/');
+            const response = await fetch('http://localhost:5000/api/rent');
             if (!response.ok) {
                 throw new Error('Unable to fetch posts!');
             }
             const jsonData = await response.json();
-            setGender(jsonData.rows);
+            setGender(jsonData);
         };
 
         fetchData();
@@ -78,7 +65,7 @@ const PageAdmin = () => {
 
     const handleDelete = async (index: string) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/book/${index}`, {
+            const response = await fetch(`http://localhost:5000/api/rent/${index}`, {
                 method: 'DELETE'
             });
             if (response.ok) {
@@ -96,24 +83,17 @@ const PageAdmin = () => {
         try {
             const formData = new FormData();
             formData.append('id', newBooks.id);
-            formData.append('title', newBooks.title);
-            formData.append('author', newBooks.author);
-            formData.append('publication_year', newBooks.publication_year);
-            formData.append('bestseller', newBooks.bestseller.toString());
-            formData.append('isNew', newBooks.isNew.toString());
+            formData.append('address', newBooks.address);
             formData.append('price', newBooks.price);
-            formData.append('GenreId', newBooks.GenreId);
-            formData.append('discount', newBooks.discount.toString());
-            formData.append('cover_image', newBooks.cover_image);
-            formData.append('description', newBooks.description);
+            formData.append('cover_image', newBooks.image);
 
-            const response = await fetch('http://localhost:5000/api/book/', {
+            const response = await fetch('http://localhost:5000/api/rent/', {
                 method: 'POST',
                 body: formData,
             });
 
             if (response.ok) {
-                const res = await fetch('http://localhost:5000/api/book/');
+                const res = await fetch('http://localhost:5000/api/rent');
                 if (!res.ok) {
                     throw new Error('Unable to fetch directions!');
                 }
@@ -130,104 +110,54 @@ const PageAdmin = () => {
     };
 
     return (
-        <div className={styles.wrapperAdmin}>
-            <div className={styles.addBooks}>
-                <div>
-                    <h2 className={styles.nameAdmin}>Добавить новую книгу</h2>
-                    <form className={styles.formAdmin} onSubmit={handleSubmit}>
-                <div className={styles.inputForm}>
-                    <label>Название:</label>
-                    <input className={styles.input} placeholder='Название' type="text" name="title"
-                           value={newBooks.title} onChange={handleChange}/>
-                </div>
-                <div className={styles.inputForm}>
-                    <label>Автор:</label>
-                    <input className={styles.input} placeholder='Автор' type="text" name="author"
-                           value={newBooks.author} onChange={handleChange}/>
-                </div>
-                <div className={styles.inputForm}>
-                    <label>Год:</label>
-                    <input className={styles.input} placeholder='Год' type="number" name="publication_year"
-                           value={newBooks.publication_year} onChange={handleChange}/>
-                </div>
-                <div className={styles.inputForm}>
-                    <label>Цена:</label>
-                    <input className={styles.input} placeholder='Цена' type="number" name="price"
-                           value={newBooks.price} onChange={handleChange}/>
-                </div>
-                        <div className={styles.inputForm}>
-                            <label>Жанр:</label>
-                            <input className={styles.input} placeholder='Жанр' type="number" name="GenreId"
-                                   value={newBooks.GenreId} onChange={handleChange}/>
-                        </div>
-                        <div className={styles.checboxBlock}>
-                            <p className={styles.textInput}>
-                                Бестселлер
-                            </p>
-                            <input type='checkbox' name='bestseller' value={'true'}
-                                   onChange={handleChange}
-                                   className={styles.checkbox}/>
-                        </div>
-                        <div className={styles.checboxBlock}>
-                            <p className={styles.textInput}>
-                                Новая книга
-                            </p>
-                            <input type='checkbox' name='isNew' value={'true'}
-                                   onChange={handleChange}
-                                   className={styles.checkbox}/>
-                        </div>
-                        <div className={styles.checboxBlock}>
-                            <p className={styles.textInput}>
-                                Скидка
-                            </p>
-                            <input type='checkbox' name='discount' value={'true'}
-                                   onChange={handleChange}
-                                   className={styles.checkbox}/>
-                </div>
-                <div className={styles.inputForm}>
-                    <label>Картинка:</label>
-                    <div className={styles.blockImages}>
-                        <input className={styles.imagesInput} type="file" name="cover_image"
-                               accept='/image/*, .png, .jpg, .web'
-                               onChange={handleChange}/>
+        <Layout Header='home' isFooterHidden>
+            <div className={styles.wrapperAdmin}>
+                <div className={styles.addBooks}>
+                    <div>
+                        <h2 className={styles.nameAdmin}>Добавить новую тур</h2>
+                        <form className={styles.formAdmin} onSubmit={handleSubmit}>
+                            <div className={styles.inputForm}>
+                                <label>Название:</label>
+                                <input className={styles.input} placeholder='Название' type="text" name="address"
+                                       value={newBooks.address} onChange={handleChange}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Цена:</label>
+                                <input className={styles.input} placeholder='Цена' type="number" name="price"
+                                       value={newBooks.price} onChange={handleChange}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Картинка:</label>
+                                <div className={styles.blockImages}>
+                                    <input className={styles.imagesInput} type="file" name="cover_image"
+                                           accept='/image/*, .png, .jpg, .web'
+                                           onChange={handleChange}/>
+                                </div>
+                            </div>
+
+                            <button className={styles.summit} type="submit">Отправить</button>
+                        </form>
                     </div>
                 </div>
-                        <div className={styles.inputForm}>
-                            <label>Информация:</label>
-                            <textarea maxLength={400} className={styles.inputText} placeholder='Текст'
-                                      name="description"
-                                      value={newBooks.description} onChange={handleChange}/>
-                        </div>
 
-                <button className={styles.summit} type="submit">Отправить</button>
-            </form>
-                </div>
-                <div className={styles.genders}>
-                    <h2 className={styles.nameAdmin}>Таблица номеров жанров</h2>
-                    {gender.map((elem: any) => (
-                        <div key={elem.id} className={styles.textGendr}><span className={styles.idgendr}>{elem.id}</span>{elem.genre}</div>
-                    ))}
-                </div>
-            </div>
-
-            <h2 className={styles.nameBooksList}>Добавленные Книги</h2>
-            <ul className={styles.blockList}>
-                {books.map((elem) => (
-                    <li key={elem.id} className={styles.infoList}>
-                        <div>
-                            <img src={`http://localhost:5000/${elem.cover_image}`} alt='tower'
-                                 className={styles.imgesBooks}/>
-                            <div className={styles.textBooks}>
-                                <div className={styles.nameBook}>{elem.author}</div>
-                                <div className={styles.renovationBook}>{elem.title}</div>
-                                <div className={styles.prise}>{elem.price} сом</div>
+                <h2 className={styles.nameBooksList}>Добавленные Туры</h2>
+                <ul className={styles.blockList}>
+                    {books.map((elem) => (
+                        <li key={elem.id} className={styles.infoList}>
+                            <div>
+                                <img src={`http://localhost:5000/${elem.image}`} alt='tower'
+                                     className={styles.imgesBooks}/>
+                                <div className={styles.textBooks}>
+                                    <div className={styles.renovationBook}>{elem.address}</div>
+                                    <div className={styles.prise}>{elem.price} сом</div>
+                                </div>
                             </div>
-                        </div>
-                    <button className={styles.delete} onClick={() => handleDelete(elem.id)}>Удалить</button>
-                    </li>
-                ))}
-            </ul>
-        </div>
+                            <button className={styles.delete} onClick={() => handleDelete(elem.id)}>Удалить</button>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </Layout>
     );
 };
 

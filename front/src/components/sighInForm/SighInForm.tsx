@@ -21,8 +21,8 @@ const SighInForm = () => {
 		if (res) {
 			router.push('/')
 		}
-
 	}
+
 	return (
 		<form onSubmit={handleSubmit} className={styles.loginForm}>
 			<div className={styles.inputForm}>
@@ -46,7 +46,6 @@ const SighInForm = () => {
 			<div></div>
 			<button className={styles.btn} type='submit'>Войти</button>
 		</form>
-
 	)
 }
 

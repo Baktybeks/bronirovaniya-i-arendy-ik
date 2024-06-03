@@ -19,19 +19,11 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-		<body>
 		<Providers>
-			<div className={styles.wrapperContent}>
-				<div className={styles.header}>
-					<TheHeader />
-				</div>
-				<main className={styles.conteiner}>{children}</main>
-				<div className={styles.footer}>
-					<TheFooter />
-				</div>
-			</div>
-		</Providers>
+		<body>
+			{children}
 		</body>
+		</Providers>
 		</html>
 	)
 }
