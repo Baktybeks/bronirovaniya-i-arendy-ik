@@ -12,6 +12,7 @@ interface User extends NextAuthUser {
 interface SessionUser {
   name?: string | null;
   email?: string | null;
+  image?: string | null;
   role: Role;
 }
 
@@ -27,10 +28,10 @@ export const authConfig:AuthOptions = {
       },
       async authorize(credentials) {
         if (!credentials || !credentials.email || !credentials.password) return null;
-        const users = await getAllUser();
-        console.log(users,'users')
 
+        const users = await getAllUser();
         const currentUser = users.find(user => user.email === credentials.email);
+        console.log(credentials);
 
         if (!currentUser) return null;
 
@@ -38,7 +39,6 @@ export const authConfig:AuthOptions = {
         if (passwordMatch) {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { password, ...userWithoutPass } = currentUser;
-
           return userWithoutPass as User;
         }
         return null;
