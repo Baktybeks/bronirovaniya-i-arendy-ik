@@ -1,87 +1,78 @@
 @import "../../app/styles/mixin";
 
-.nameHeader {
-  padding-top: 60px;
-  text-align: center;
-  font-size: 36px;
-  font-weight: 600;
-  line-height: 36px;
-  color: #000;
-}
-
-.blockImage {
-  width: 212.45px;
-  height: 212px;
-  border-radius: 300px;
-  background: #F1EEE3;
-  display: grid;
-  place-items: center;
-  padding-top: 40px;
-  overflow: hidden;
-}
-
-.blockText {
-  width: 100px;
-  text-align: center;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 30px;
-  color: #000;
-  margin: 14px auto;
-}
-
-.inputRange {
-  -webkit-appearance: none;
-  width: 500px;
-  height: 10px;
-  background: #ddd;
-  border-radius: 10px;
-  outline: none;
-  margin: 10px 0;
-
-  &::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 100px;
-    height: 10px;
-    background: #111111;
-    border-radius: 10px;
-    cursor: pointer;
-  }
-
-  &::-moz-range-thumb {
-    width: 20px;
-    height: 20px;
-    background: #fff;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-}
-
-.images {
-  width: 120.25px;
-  height: 187.09px;
-}
-
-.blockButtons {
+.openWorld {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
-  column-gap: 16px;
+  justify-content: space-between;
+  column-gap: 24px;
 }
 
-.buttonPrev, .buttonNext {
-  width: 50px;
-  height: 50px;
-  display: grid;
-  place-items: center;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 100%;
-  cursor: pointer;
+.info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
 }
 
-.buttonPrev {
-  transform: rotate(180deg);
+.nameHeader {
+  width: 600px;
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 76.8px;
+  text-align: left;
+
+  @include tablet {
+    font-size: 34px;
+    line-height: 54px;
+  }
+}
+
+.text {
+  width: 469px;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 28.8px;
+  text-align: left;
+  color: rgba(128, 128, 128, 1);
+}
+
+.write {
+  color: #E61C5D;
+}
+
+.textFuture {
+  width: 520px;
+  font-size: 20px;
+  line-height: 30px;
+  color: #fff;
+  margin-bottom: 75px;
+}
+
+.list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.blockList {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+}
+
+.num {
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 48px;
+  text-align: left;
+  color: #E61C5D;
+}
+
+.strings {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 19.2px;
+  text-align: left;
+  color: #808080;
 }

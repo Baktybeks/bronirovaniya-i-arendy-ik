@@ -2,10 +2,11 @@ import React from 'react'
 
 const ArrowRight = () => {
 	return (
-		<svg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'>
-			<path
-				d='M16.1716 11.0009L10.8076 5.63687L12.2218 4.22266L20 12.0009L12.2218 19.779L10.8076 18.3648L16.1716 13.0009H4V11.0009H16.1716Z'
-				fill='black' />
+		<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<circle cx="24" cy="24" r="24" fill="#E61C5D" fillOpacity="0.04"/>
+			<path d="M20.9102 31.9181L27.4302 25.3981C28.2002 24.6281 28.2002 23.3681 27.4302 22.5981L20.9102 16.0781"
+				  stroke="#E61C5D" strokeWidth="1.5" strokeMiterlimit="10" strokeLinecap="round"
+				  strokeLinejoin="round"/>
 		</svg>
 	)
 }

@@ -1,97 +1,43 @@
 'use client'
 
-import React, { useEffect, useRef, useState } from 'react'
-import Slider from 'react-slick'
-import ArrowRight from '@/components/theCriteria/icons/ArrowRight'
-
+import React from 'react'
 import './TheCriteria.scss'
+import Image from "next/image";
+import Imagesti from "./icons/Images.png";
 import styles from './TheCriteria.module.scss'
 
 
 const TheCriteria = () => {
-	const [data, setData] = useState([])
-	const [slideIndex, setSlideIndex] = useState<number>(0)
-	const [updateCount, setUpdateCount] = useState<number>(0)
-
-	let sliderRef = useRef<Slider | null>(null)
-
-	useEffect(() => {
-		const fetchData = async () => {
-			const response = await fetch('http://localhost:5000/api/genre/')
-			if (!response.ok) {
-				throw new Error('Unable to fetch posts!')
-			}
-			const jsonData = await response.json()
-			setData(jsonData.rows)
-		}
-
-		fetchData()
-	}, [])
-
-	const settings = {
-		infinite: true,
-		speed: 500,
-		slidesToShow: 1,
-		slidesToScroll: 1,
-		afterChange: () => setUpdateCount(updateCount + 1),
-		beforeChange: (current: number, next: number) => setSlideIndex(next)
-	}
-
-	const next = () => {
-		if (sliderRef.current) {
-			sliderRef.current.slickNext()
-		}
-	}
-
-	const previous = () => {
-		if (sliderRef.current) {
-			sliderRef.current.slickPrev()
-		}
-	}
-	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = parseInt(e.target.value)
-		if (sliderRef.current) {
-			sliderRef.current.slickGoTo(value)
-		}
-	}
-
 	return (
-		<div>
-			<h2 className={styles.nameHeader}>Магазин по категориям</h2>
-			<div className='sliderCriteria'>
-				<Slider
-					ref={(slider: any) => {
-						sliderRef.current = slider
-					}}
-					{...settings}
-				>
-					{data.map((elem: any) => (
-						<div key={elem.id} className={styles.blocBook}>
-							<div className={styles.blockImage}>
-								<img className={styles.images} src={`http://localhost:5000/${elem.cover_image}`} alt='image' />
-							</div>
-							<div className={styles.blockText}>{elem.genre}</div>
-						</div>
-					))}
-				</Slider>
-				<div className={styles.blockButtons}>
-					<button className={styles.buttonPrev} onClick={previous}>
-						<ArrowRight />
-					</button>
-					<input
-						className={styles.inputRange}
-						onChange={handleChange}
-						value={slideIndex}
-						type='range'
-						min={0}
-						max={4}
-					/>
-					<button className={styles.buttonNext} onClick={next}>
-						<ArrowRight />
-					</button>
+		<>
+			<div className={styles.openWorld}>
+				<div className={styles.image}>
+					<Image src={Imagesti} alt='image' />
+				</div>
+				<div className={styles.info}>
+					<h1 className={styles.nameHeader}>Наш план  — исполнить вашу <span className={styles.write}>мечту</span></h1>
+					<p className={styles.text}>Нас выбирают уже более 15 лет!</p>
+					<ul className={styles.list}>
+						<li className={styles.blockList}>
+							<span className={styles.num}>15</span>
+							<span className={styles.strings}>На рынке</span>
+						</li>
+						<li className={styles.blockList}>
+							<span className={styles.num}>1k</span>
+							<span className={styles.strings}>домов</span>
+						</li>
+						<li className={styles.blockList}>
+							<span className={styles.num}>20k</span>
+							<span className={styles.strings}>Счасливых посетителей </span>
+						</li>
+						<li className={styles.blockList}>
+							<span className={styles.num}>4.9</span>
+							<span className={styles.strings}>Наш средний показатель</span>
+						</li>
+					</ul>
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }
 

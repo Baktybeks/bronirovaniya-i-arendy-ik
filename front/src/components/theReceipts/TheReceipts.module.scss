@@ -1,69 +1,81 @@
 .nameSliders {
-  font-size: 36px;
-  font-weight: 600;
-  line-height: 36px;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 57.6px;
+    text-align: left;
 }
 
 .blockHeader {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 40px;
 }
 
 .sliderContainer {
-  cursor: grab;
+    cursor: grab;
 }
 
-.nameBook {
-  font-size: 12px;
-  font-style: italic;
-  font-weight: 400;
-  line-height: 16px;
+.nameLocation {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 16px;
+    margin: 8px 0;
 }
 
 .renovationBook {
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 30px;
-  text-align: left;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 30px;
+    text-align: left;
 }
 
 .prise {
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 30px;
-  color: #F1592B;
-  margin-top: 15px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 30px;
+    color: #F1592B;
 }
 
-.imgesBooks {
-  width: 212px;
-  height: 330px;
+.write {
+    color: #E61C5D;
 }
 
-.textBooks {
-  margin-top: 23px;
+.imgesLocation {
+    width: 212px;
+    height: 330px;
+}
+
+.textLocation {
+    margin-top: 23px;
 }
 
 .blockButtons {
-  display: flex;
-  flex-direction: row;
-  column-gap: 10px;
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
 }
 
 .buttonPrev, .buttonNext {
-  width: 50px;
-  height: 50px;
-  display: grid;
-  place-items: center;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 100%;
-  cursor: pointer;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 100%;
+    cursor: pointer;
 }
 
 .buttonPrev {
-  transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.infoLocation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
