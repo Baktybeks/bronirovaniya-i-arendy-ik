@@ -1,0 +1,43 @@
+.footer {
+  width: 100%;
+  background: #fff;
+  margin-bottom: 50px;
+}
+
+.contentYslug {
+  width: 100%;
+}
+
+.yslygi {
+  width: 1423px;
+  height: 149px;
+  margin: 0 auto;
+  padding: 0 112px;
+  display: flex;
+  column-gap: 30px;
+}
+
+.infoFooter {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.links {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.tel {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.textTel {
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 21.6px;
+  color: #112B3C;
+}
