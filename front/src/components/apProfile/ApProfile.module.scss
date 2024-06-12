@@ -1,0 +1,80 @@
+.blockApplication {
+  padding: 0 135px 50px;
+}
+
+.hello {
+  font-size: 24px;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  column-gap: 16px;
+}
+
+.list {
+  font-weight: 500;
+  font-size: 18px;
+  margin: 24px 0;
+}
+
+.blockComment {
+  padding: 16px;
+  background: #F0F0F073;
+  border: 1px solid #FFFFFF;
+  border-radius: 16px;
+}
+
+.userImg {
+  width: 264px;
+  height: 180px;
+  border-radius: 8px;
+}
+
+.userBlock {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.name {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 22.4px;
+  letter-spacing: 0.5px;
+  text-align: left;
+  color: #333333;
+  margin-bottom: 16px;
+}
+
+.data {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 19.6px;
+  letter-spacing: 0.0125em;
+  text-align: left;
+  color: #636363;
+}
+
+.som {
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 19.6px;
+  letter-spacing: 0.0125em;
+  text-align: left;
+  color: #42A7C3;
+  margin-top: 25px;
+}
+
+.delete {
+  width: 100%;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  background: #F1592B;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

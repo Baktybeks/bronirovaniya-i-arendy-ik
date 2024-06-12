@@ -8,6 +8,7 @@ import 'slick-carousel/slick/slick.css'
 import './TheSlider.scss'
 import styles from './TheReceipts.module.scss'
 import Nums from "@/components/theCriteria/icons/nums";
+import Link from "next/link";
 
 const TheReceipts = () => {
     const [data, setData] = useState([])
@@ -68,8 +69,11 @@ const TheReceipts = () => {
                                 sliderRef.current = slider
                             }}
                             {...settings}>
-                            {data.map((elem: any, index) => (
-                                <div key={elem.id}>
+                            {data.map((elem: any) => (
+                                <Link href={{
+                                    pathname: '/locations',
+                                    query: { id: elem.id.toString() }
+                                }}  key={elem.id}>
                                     <img src={`http://localhost:5000/${elem.image}`} alt='tower'
                                          className={styles.imgesLocation}/>
                                     <div className={styles.textLocation}>
@@ -80,7 +84,7 @@ const TheReceipts = () => {
                                             <div className={styles.prise}>{elem.price}</div>
                                         </div>
                                     </div>
-                                </div>
+                                </Link>
                             ))}
                         </Slider>
                     </div>
