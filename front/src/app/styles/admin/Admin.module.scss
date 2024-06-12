@@ -235,3 +235,29 @@
   padding: 3px;
   border: 1px solid #E5B300;
 }
+
+.blockComment {
+  width: 302px;
+  height: auto;
+  border-radius: 16px;
+  border: 1px solid #FAFAFA;
+  padding: 16px;
+  background: #FFFFFF;
+}
+
+.block {
+  margin-bottom: 100px;
+}
+
+.textDesc {
+  width: 250px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.prise {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 30px;
+  color: #F1592B;
+}

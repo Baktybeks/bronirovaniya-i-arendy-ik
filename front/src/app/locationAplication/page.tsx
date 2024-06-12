@@ -1,6 +1,8 @@
 'use client'
 
 import React, {useEffect, useState} from 'react';
+import Layout from "@/components/layout/Layout";
+import styles from "@/app/styles/location/Location.module.scss";
 
 const PageApplicationLocation = () => {
     const [data, setData] = useState([]);
@@ -19,9 +21,18 @@ const PageApplicationLocation = () => {
     }, []);
 
     return (
-        <div>
+        <Layout Header='home'>
+            <div className={styles.blockLocation}>
+                <h2 className={styles.headerPage}>Бостери</h2>
+                <div className={styles.blockLoc}>
+                    {data.map((elem: any) => (
+                        <div key={elem.id}>
 
-        </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </Layout>
     );
 };
 
