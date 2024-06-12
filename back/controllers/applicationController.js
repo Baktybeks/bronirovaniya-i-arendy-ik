@@ -1,13 +1,13 @@
-const { Application, Rent } = require('../models/models');
+const { Application, Rent, RentalItem } = require('../models/models');
 const ApiError = require('../error/ApiError');
 
 
 class ApplicationController {
     async create(req, res, next) {
         try {
-            const { name, email, phone, reservation, rent, processed, RentId } = req.body;
+            const { name, phone, dayFrom, dayTo, paymentMethod, approved, processed, RentalItemId } = req.body;
             const data = await Application.create({
-                name, email, phone, reservation, rent, processed, RentId
+                name, phone, dayFrom, dayTo, paymentMethod, approved, processed, RentalItemId
             });
             return res.json(data);
         } catch(e) {
@@ -18,17 +18,24 @@ class ApplicationController {
     async getAll(req, res) {
         const data = await Application.findAll({
             order: [
-                [ 'processed', 'ASC' ],
-                [ 'createdAt', 'DESC' ]
+                ['processed', 'ASC'],
+                ['createdAt', 'DESC']
             ],
             include: [
-            {
-                model: Rent,
-                as: 'Rent',
-                attributes: [ 'address', 'price' ],
-            }
-        ],
-        });
+                {
+                    model: RentalItem,
+                    as: 'RentalItem',
+                    attributes: ['title', 'price', 'description', 'dayFrom', 'dayTo', 'day', 'RentId', 'image'],
+                    include: [
+                        {
+                            model: Rent,
+                            as: 'Rent',
+                            attributes: ['address', 'price', 'image'],
+                        },
+                    ]
+                }
+            ]
+        })
         return res.json(data);
     }
 
@@ -48,13 +55,12 @@ class ApplicationController {
     async updateProcessed(req, res, next) {
         try {
             const { id } = req.params;
-            const { processed, reservation, rent } = req.body;
+            const { processed, approved } = req.body;
 
             const updatedApplication = await Application.update(
                 {
                     processed,
-                    reservation,
-                    rent
+                    approved,
                 },
                 { where: { id } }
             );

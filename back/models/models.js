@@ -16,6 +16,18 @@ const Rent = sequelize.define('Rent', {
     price: { type: DataTypes.INTEGER, allowNull: false },
 });
 
+const RentalItem  = sequelize.define('RentalItem', {
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    title: { type: DataTypes.STRING, allowNull: false },
+    price: { type: DataTypes.INTEGER, allowNull: false },
+    description: { type: DataTypes.TEXT, allowNull: false },
+    dayFrom: { type: DataTypes.STRING, allowNull: false },
+    dayTo: { type: DataTypes.STRING, allowNull: false },
+    day: { type: DataTypes.INTEGER, allowNull: false },
+    RentId: { type: DataTypes.INTEGER, allowNull: false },
+    image: { type: DataTypes.STRING, allowNull: false },
+});
+
 const Review = sequelize.define('Review', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     name: { type: DataTypes.STRING, allowNull: false },
@@ -25,18 +37,24 @@ const Review = sequelize.define('Review', {
 
 const Application = sequelize.define('Application', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+    name: { type: DataTypes.STRING, allowNull: false },
     phone: { type: DataTypes.STRING, allowNull: false },
-    email: { type: DataTypes.STRING, allowNull: false },
+    dayFrom: { type: DataTypes.STRING, allowNull: false },
+    dayTo: { type: DataTypes.STRING, allowNull: false },
+    paymentMethod: { type: DataTypes.STRING, allowNull: false },
     processed: { type: DataTypes.BOOLEAN, defaultValue: false },
-    reservation: { type: DataTypes.BOOLEAN, defaultValue: false },
-    rentStatus: { type: DataTypes.BOOLEAN, defaultValue: false },
+    approved: { type: DataTypes.BOOLEAN, defaultValue: false },
+    RentalItemId: { type: DataTypes.INTEGER, allowNull: false },
 });
 
-Rent.hasMany(Application);
-Application.belongsTo(Rent);
+Rent.hasMany(RentalItem, { as: 'Rent', foreignKey: 'RentId' });
+RentalItem.belongsTo(Rent, { as: 'Rent', foreignKey: 'RentId' });
+
+RentalItem.hasMany(Application, { as: 'RentalItem', foreignKey: 'RentalItemId' });
+Application.belongsTo(RentalItem, { as: 'RentalItem', foreignKey: 'RentalItemId' });
 
 module.exports = {
-    User, Rent, Review, Application
+    User, Rent, RentalItem, Review, Application
 };
 
 

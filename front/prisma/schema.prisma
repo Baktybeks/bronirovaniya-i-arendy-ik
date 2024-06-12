@@ -19,13 +19,31 @@ model Users {
 
 model Applications {
   id                Int             @id @default(autoincrement())
+  name             String
   phone             String
-  email             String
+  dayFrom             String
+  dayTo             String
+  paymentMethod             String
   processed         Boolean         @default(false)
-  reservation       Boolean         @default(false)
-  rentStatus        Boolean         @default(false)
+  approved         Boolean         @default(false)
+  RentalItemId      Int
+  rentalItem        RentalItems     @relation(fields: [RentalItemId], references: [id])
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+}
+
+model RentalItems {
+  id                Int             @id @default(autoincrement())
+  title             String
+  price             String
+  description             String
+  dayFrom           String
+  dayTo             String
+  day               Int
+  image             String
+  application       Applications[]
   RentId            Int
-  rent              Rents           @relation(fields: [RentId], references: [id])
+  rent              Rents     @relation(fields: [RentId], references: [id])
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 }
@@ -35,7 +53,7 @@ model Rents {
   address           String
   price             String
   image             String
-  application       Applications[]
+  rentalItems       RentalItems[]
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt
 }
