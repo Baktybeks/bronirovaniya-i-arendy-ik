@@ -1,16 +1,29 @@
 'use client'
 
-import React, {useRef,} from 'react'
+import React, {useEffect, useRef, useState,} from 'react'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import './TheSlider.scss'
 import styles from './TheBooksSold.module.scss'
-import {dataComments} from "./dataComments/dataComments";
 import Star from "./icons/star";
-import ArrowRight from "@/components/theCriteria/icons/ArrowRight";
 
 const TheBooksSold = () => {
-    let sliderRef = useRef<Slider | null>(null)
+    const [data, setData] = useState([])
+
+    let sliderRef = useRef<Slider | null>(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch('http://localhost:5000/api/review/')
+            if (!response.ok) {
+                throw new Error('Unable to fetch posts!')
+            }
+            const jsonData = await response.json()
+            setData(jsonData)
+        }
+
+        fetchData()
+    }, []);
 
     const settings = {
         focusOnSelect: true,
@@ -33,16 +46,19 @@ const TheBooksSold = () => {
                                 sliderRef.current = slider
                             }}
                             {...settings}>
-                            {dataComments.map((elem: any) => (
+                            {data.map((elem: any) => (
                                 <div key={elem.id} className={styles.blockComment}>
                                     <div className={styles.userComments}>
                                         <div className={styles.userBlock}>
                                             <div className={styles.infoUser}>
-                                            <div className={styles.userImg}>{elem.avatar}</div>
+                                            <div className={styles.userImg}>
+                                                <img src={`http://localhost:5000/${elem.avatar}`} alt='tower'
+                                                     className={styles.userImg}/>
+                                                </div>
                                                 <h2 className={styles.name}>{elem.name}</h2>
                                                 <p className={styles.works}>{elem.works}</p>
                                                 <div><Star/></div>
-                                                <p className={styles.textDesc}>{elem.desc}</p>
+                                                <p className={styles.textDesc}>{elem.review}</p>
                                             </div>
                                         </div>
                                     </div>

@@ -7,6 +7,11 @@
     height: 445px !important;
   }
 
+  .slick-track {
+    display: flex;
+    justify-content: center;
+  }
+
   .slick-arrow {
     display: none !important;
   }

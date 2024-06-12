@@ -7,6 +7,12 @@
     height: 445px !important;
   }
 
+  .slick-track {
+    display: flex;
+    justify-content: center;
+
+  }
+
   .slick-arrow {
     display: none !important;
   }
@@ -14,8 +20,8 @@
   .slick-slide {
     display: grid !important;
     place-items: flex-end;
-    width: 212px !important;
-    height: 445px;
+    width: 445px !important;
+    height: 335px;
     border-radius: 15px !important;
     margin-right: 30px;
     padding-bottom: 20px !important;

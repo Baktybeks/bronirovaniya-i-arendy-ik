@@ -18,18 +18,23 @@
 }
 
 .nameLocation {
-    font-size: 12px;
-    font-style: italic;
-    font-weight: 400;
+    font-size: 24px;
+    font-weight: 600;
     line-height: 16px;
     margin: 8px 0;
+    color: #101828;
+}
+
+.blockLocation {
+    width: 340px;
 }
 
 .renovationBook {
-    font-size: 16px;
-    font-weight: 600;
-    line-height: 30px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 31.68px;
     text-align: left;
+    color: #E61C5D;
 }
 
 .prise {
@@ -44,7 +49,7 @@
 }
 
 .imgesLocation {
-    width: 212px;
+    width: 340px;
     height: 330px;
 }
 
@@ -78,4 +83,13 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+}
+
+.sliderReceipts {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 }
