@@ -212,6 +212,7 @@
 .addBooks {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
@@ -260,4 +261,9 @@
   font-weight: 600;
   line-height: 30px;
   color: #F1592B;
+}
+
+.imge {
+  width: 200px;
+  height: 200px;
 }

@@ -28,18 +28,34 @@ const PageAdmin = () => {
         review: '',
         avatar: '',
     });
+    const [rentItem, setRentItem] = useState<any>([]);
+    const [newRentItem, setNewRentItem] = useState<any>({
+        id: '',
+        title: "",
+        price: "",
+        description: "",
+        dayFrom: "",
+        dayTo: "",
+        day: '',
+        RentId: '',
+        image: "",
+    });
+
 
     useEffect(() => {
         const fetchData = async () => {
             const response = await fetch('http://localhost:5000/api/rent');
             const responseRev = await fetch('http://localhost:5000/api/review/');
+            const responseRevItem = await fetch('http://localhost:5000/api/rental_item');
             if (!response.ok) {
                 throw new Error('Unable to fetch posts!');
             }
             const jsonData = await response.json();
             const jsonDataRev = await responseRev.json();
+            const jsonDataRevItem = await responseRevItem.json();
             setRent(jsonData);
             setReview(jsonDataRev);
+            setRentItem(jsonDataRevItem);
         };
 
         fetchData();
@@ -55,6 +71,21 @@ const PageAdmin = () => {
             }));
         } else {
             setNewRent(prevState => ({
+                ...prevState,
+                [name]: value
+            }));
+        }
+    };
+
+    const handleChangeRentItem = (e: any) => {
+        const { name, value } = e.target;
+        if (name === 'image') {
+            setNewRentItem((prevState: any) => ({
+                ...prevState,
+                [name]: e.target.files[0]
+            }));
+        } else {
+            setNewRentItem((prevState: any) => ({
                 ...prevState,
                 [name]: value
             }));
@@ -99,6 +130,22 @@ const PageAdmin = () => {
             });
             if (response.ok) {
                 setReview((book: any) => book.filter((app: any) => app.id !== index));
+                console.log('Объект удален')
+            } else {
+                console.error('Ошибка при удалении направления:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса:', error);
+        }
+    };
+
+    const handleDeleteReviewItem = async (index: string) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/rental_item/${index}`, {
+                method: 'DELETE'
+            });
+            if (response.ok) {
+                setRentItem((book: any) => book.filter((app: any) => app.id !== index));
                 console.log('Объект удален')
             } else {
                 console.error('Ошибка при удалении направления:', response.statusText);
@@ -170,6 +217,43 @@ const PageAdmin = () => {
         }
     };
 
+    const handleSubmitRentItem = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        try {
+            const formData = new FormData();
+            formData.append('id', newRentItem.id);
+            formData.append('title', newRentItem.title);
+            formData.append('address', newRentItem.address);
+            formData.append('price', newRentItem.price);
+            formData.append('image', newRentItem.image);
+            formData.append('description', newRentItem.description);
+            formData.append('dayFrom', newRentItem.dayFrom);
+            formData.append('dayTo', newRentItem.dayTo);
+            formData.append('day', newRentItem.day);
+            formData.append('RentId', newRentItem.RentId);
+
+            const response = await fetch('http://localhost:5000/api/rental_item/', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (response.ok) {
+                const res = await fetch('http://localhost:5000/api/review');
+                if (!res.ok) {
+                    throw new Error('Unable to fetch directions!');
+                }
+                const jsonData = await res.json();
+                setReview(jsonData);
+
+                console.log('добавлен объект');
+            } else {
+                console.error('Ошибка при добавлении нового направления:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Ошибка при выполнении запроса:', error);
+        }
+    };
+
     return (
         <Layout Header='home' isFooterHidden>
             <div className={styles.wrapperAdmin}>
@@ -199,6 +283,58 @@ const PageAdmin = () => {
                             <button className={styles.summit} type="submit">Отправить</button>
                         </form>
                     </div>
+
+                    <div>
+                        <h2 className={styles.nameAdmin}>Добавить домики</h2>
+                        <form className={styles.formAdmin} onSubmit={handleSubmitRentItem}>
+                            <div className={styles.inputForm}>
+                                <label>Название:</label>
+                                <input className={styles.input} placeholder='Название' type="text" name="title"
+                                       value={newRentItem.title} onChange={handleChangeRentItem}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Адрес:</label>
+                                <input className={styles.input} placeholder='Адрес' type="text" name="address"
+                                       value={newRentItem.address} onChange={handleChangeRentItem}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Картинка:</label>
+                                <div className={styles.blockImages}>
+                                    <input className={styles.imagesInput} type="file" name="image"
+                                           accept='/image/*, .png, .jpg, .web'
+                                           onChange={handleChangeRentItem}/>
+                                </div>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Текст:</label>
+                                <input className={styles.input} placeholder='Текст' type="text" name="description"
+                                       value={newRentItem.description} onChange={handleChangeRentItem}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Дни от:</label>
+                                <input className={styles.input} placeholder='День от' type="number" name="dayFrom"
+                                       value={newRentItem.dayFrom} onChange={handleChangeRentItem}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Дни до:</label>
+                                <input className={styles.input} placeholder='День до' type="text" name="dayTo"
+                                       value={newRentItem.dayTo} onChange={handleChangeRentItem}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Дней:</label>
+                                <input className={styles.input} placeholder='Дней' type="text" name="day"
+                                       value={newRentItem.day} onChange={handleChangeRentItem}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Соединение с турами:</label>
+                                <input className={styles.input} placeholder='номер' type="number" name="RentId"
+                                       value={newRentItem.RentId} onChange={handleChangeRentItem}/>
+                            </div>
+
+                            <button className={styles.summit} type="submit">Отправить</button>
+                        </form>
+                    </div>
+
                     <div>
                         <h2 className={styles.nameAdmin}>Добавить новые комментарии</h2>
                         <form className={styles.formAdmin} onSubmit={handleSubmitReview}>
@@ -262,6 +398,33 @@ const PageAdmin = () => {
                                         </div>
                                     </div>
                                     <button className={styles.delete} onClick={() => handleDeleteReview(elem.id)}>Удалить</button>
+                                </div>
+                            </div>
+                        ))}
+                    </ul>
+                </div>
+
+                <div className={styles.block}>
+                    <h2 className={styles.nameBooksList}>Добавленные домики</h2>
+                    <ul className={styles.blockList}>
+                        {rentItem.map((elem: any) => (
+                            <div key={elem.id} className={styles.blockComment}>
+                                <div className={styles.userComments}>
+                                    <div className={styles.userBlock}>
+                                        <div className={styles.infoUser}>
+                                            <div className={styles.userImg}>
+                                                <img src={`http://localhost:5000/${elem.image}`} alt='img'
+                                                     className={styles.userImg}/>
+                                            </div>
+                                            <h2 className={styles.name}>{elem.title}</h2>
+                                            <h2 className={styles.name}>{elem.price}</h2>
+                                            <h2 className={styles.name}>{elem.day}</h2>
+                                            <h2 className={styles.name}>{elem.description}</h2>
+                                            <div><Star/></div>
+                                            <p className={styles.textDesc}>{elem.review}</p>
+                                        </div>
+                                    </div>
+                                    <button className={styles.delete} onClick={() => handleDeleteReviewItem(elem.id)}>Удалить</button>
                                 </div>
                             </div>
                         ))}

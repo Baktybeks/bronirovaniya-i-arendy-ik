@@ -8,23 +8,28 @@ import styles from './TheAddAplication.module.scss';
 interface Props {
     name: string;
     phone: string;
+    dayFrom: string;
+    dayTo: string;
     paymentMethod: string;
-    delivery: boolean;
+    RentalItemId: number;
     processed: boolean;
 }
 
 interface PropsActive {
     onActive: (value: boolean) => void;
     active: boolean;
+    idAplication: number;
 }
 
-const TheAddAplication = ({onActive, active}: PropsActive) => {
+const TheAddAplication = ({onActive, active, idAplication}: PropsActive) => {
     const session = useSession();
     const [newDirection, setNewDirection] = useState<Props>({
         name: '',
         phone: '',
+        dayFrom: '',
+        RentalItemId: idAplication,
         paymentMethod: '',
-        delivery: false,
+        dayTo: '',
         processed: false,
     });
 
@@ -46,8 +51,10 @@ const TheAddAplication = ({onActive, active}: PropsActive) => {
             const formData = new FormData();
             formData.append('name', newDirection.name);
             formData.append('phone', newDirection.phone);
+            formData.append('dayFrom', newDirection.dayFrom);
+            formData.append('dayTo', newDirection.dayTo);
             formData.append('paymentMethod', newDirection.paymentMethod);
-            formData.append('delivery', newDirection.delivery.toString());
+            formData.append('RentalItemId', idAplication.toString());
             formData.append('processed', newDirection.processed.toString());
 
             const response = await fetch('http://localhost:5000/api/application/', {
@@ -81,6 +88,16 @@ const TheAddAplication = ({onActive, active}: PropsActive) => {
                                    placeholder='телефон' onChange={handleChange}/>
                         </div>
                         <div className={styles.inputForm}>
+                            <label className={styles.textInput}>От куда:</label>
+                            <input type='number' name='dayFrom' value={newDirection.dayFrom} className={styles.inputs}
+                                   placeholder='день' onChange={handleChange}/>
+                        </div>
+                        <div className={styles.inputForm}>
+                            <label className={styles.textInput}>До куда:</label>
+                            <input type='number' name='dayTo' value={newDirection.dayTo} className={styles.inputs}
+                                   placeholder='день' onChange={handleChange}/>
+                        </div>
+                        <div className={styles.inputForm}>
                             <label className={styles.textInput}>Оплата:</label>
                             <select className={styles.inputs} name="paymentMethod" value={newDirection.paymentMethod}
                                     onChange={handleChange}>
@@ -91,19 +108,12 @@ const TheAddAplication = ({onActive, active}: PropsActive) => {
                             </select>
                         </div>
                         <div className={styles.checboxInfo}>
-                            <input type='checkbox' name='delivery' value={'true'} className={styles.inputs}
-                                   onChange={handleChange}/>
-                            <p className={styles.textInput}>
-                                Доставка
-                            </p>
-                        </div>
-                        <div className={styles.checboxInfo}>
                             <div>
                                 <input type='checkbox' name='processed' value={'false'} required
                                        onChange={handleChange} className={styles.checkbox}/>
                             </div>
                             <p className={styles.textInput}>
-                                Подтвердить покупку
+                                Подтвердить
                             </p>
                         </div>
                     </div>

@@ -37,6 +37,14 @@
   color: #E61C5D;
 }
 
+.desk {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 16px;
+  margin: 8px 0;
+  color: #101828;
+}
+
 .prise {
   font-size: 18px;
   font-weight: 600;
@@ -92,4 +100,29 @@
   align-items: center;
   justify-content: space-between;
   gap: 16px;
+}
+
+.shadow {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(17, 17, 17, 0.5);
+  z-index: 10;
+}
+
+.application {
+  display: block;
+  background: #fff;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 11;
+}
+
+.shadowNot,  .applicationNot{
+  display: none;
 }

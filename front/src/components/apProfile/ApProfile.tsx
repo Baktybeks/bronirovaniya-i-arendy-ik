@@ -46,23 +46,23 @@ const ApProfile = () => {
                         .filter((elem: any) => session.data?.user?.name === elem.name)
                         .map((elem: any, index: number) => {
                             return (
-                                <ul key={elem.id} className={styles.list}>
-                                    {session.data?.user?.name === elem.name && elem.processed === true ? <li>Ваша заявка
-                                        принята</li> : <li>Ваша заявка в обработке </li>}
-                                    <div className={styles.userBlock}>
-                                        <div className={styles.userImg}>
-                                            <img src={`http://localhost:5000/${elem.Rent.image}`} alt='img'
-                                                 className={styles.userImg}/>
+                                <div key={elem.id} className={styles.list}>
+                                    {session.data?.user?.name === elem.name && elem.processed === true ? <div>Ваша заявка
+                                        принята</div> : <div>Ваша заявка в обработке </div>}
+                                    <div key={elem.id} className={styles.infoList}>
+                                        <div className={styles.blockInfo}>
+                                            <img src={`http://localhost:5000/${elem.RentalItem.image}`} alt='tower'
+                                                 className={styles.imge}/>
+                                            <p className={styles.name}>Тел: {elem.phone}</p>
+                                            <p className={styles.address}>Название: {elem.RentalItem.title}</p>
+                                            <p className={styles.address}>Адрес: {elem.RentalItem.Rent.address}</p>
+                                            <p className={styles.prise}>Цена: {elem.RentalItem.price} сом</p>
+                                            <h2 className={styles.name}>Оплата: {elem.paymentMethod}</h2>
+                                            <p className={styles.prise}>Дни: {elem.RentalItem.day} дней</p>
+                                            <button className={styles.delete} onClick={() => handleDelete(elem.id)}>Удалить</button>
                                         </div>
-                                        <div className={styles.textNewItems}>
-                                            <div className={styles.name}>{elem.Rent.title}</div>
-                                            <div className={styles.som}>
-                                                <div>{elem.Service.basic_package} сом</div>
-                                            </div>
-                                        </div>
-                                        <button className={styles.delete} onClick={() => handleDelete(elem.id)}>Удалить</button>
                                     </div>
-                                </ul>
+                                </div>
                             );
                         })
                 }</div>

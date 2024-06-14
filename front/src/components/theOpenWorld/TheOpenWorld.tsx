@@ -42,18 +42,18 @@ const TheOpenWorld: React.FC<TheOpenWorldProps> = ({
 				<div className={styles.info}>
 					<h1 className={styles.nameHeader}>Осмелитесь прожить жизнь, о которой вы всегда мечтали.</h1>
 					<p className={styles.text}>Жизнь коротка, а мир огромен. Так что лучше начать.</p>
-					<form onSubmit={handleSubmit}>
-						<select value={selectedOption} onChange={handleOptionChange}>
-							<option value='option1'>Option 1</option>
-							<option value='option2'>Option 2</option>
-						</select>
-						<input
-							type='date'
-							value={selectedDate.toISOString().substring(0, 10)}
-							onChange={(e) => handleDateChange(new Date(e.target.value))}
-						/>
-						<button type='submit'>Submit</button>
-					</form>
+					{/*<form onSubmit={handleSubmit}>*/}
+					{/*	<select value={selectedOption} onChange={handleOptionChange}>*/}
+					{/*		<option value='option1'>Option 1</option>*/}
+					{/*		<option value='option2'>Option 2</option>*/}
+					{/*	</select>*/}
+					{/*	<input*/}
+					{/*		type='date'*/}
+					{/*		value={selectedDate.toISOString().substring(0, 10)}*/}
+					{/*		onChange={(e) => handleDateChange(new Date(e.target.value))}*/}
+					{/*	/>*/}
+					{/*	<button type='submit'>Submit</button>*/}
+					{/*</form>*/}
 				</div>
 				<div className={styles.image}>
 					<Image src={Imagesti} alt='image' />

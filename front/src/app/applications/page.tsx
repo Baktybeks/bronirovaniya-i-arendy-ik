@@ -45,7 +45,6 @@ const PageApplications = () => {
     };
 
 
-    console.log(applications)
     const handleSubmit = async (index: string) => {
         try {
             const formData = new FormData();
@@ -75,10 +74,14 @@ const PageApplications = () => {
                 {applications.map((elem: any) => (
                     <li key={elem.id} className={styles.infoList}>
                         <div className={styles.blockInfo}>
-                            <h2 className={styles.name}>{elem.phone}</h2>
-                            <p className={styles.email}>{elem.email}</p>
-                            <p className={styles.address}>{elem.Rent.address}</p>
-                            <p className={styles.prise}>${elem.Rent.price}</p>
+                            <img src={`http://localhost:5000/${elem.RentalItem.image}`} alt='tower'
+                                 className={styles.imge}/>
+                            <p className={styles.name}>Тел: {elem.phone}</p>
+                            <p className={styles.address}>Название: {elem.RentalItem.title}</p>
+                            <p className={styles.address}>Адрес: {elem.RentalItem.Rent.address}</p>
+                            <p className={styles.prise}>Цена: {elem.RentalItem.price} сом</p>
+                            <h2 className={styles.name}>Оплата: {elem.paymentMethod}</h2>
+                            <p className={styles.prise}>Дни: {elem.RentalItem.day} дней</p>
                             <div className={styles.checboxInfo}>
                                 <div className={styles.checboxBlock}>
                                     <input type='checkbox' name='processed' checked={elem.processed}
