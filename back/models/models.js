@@ -16,7 +16,7 @@ const Rent = sequelize.define('Rent', {
     price: { type: DataTypes.INTEGER, allowNull: false },
 });
 
-const RentalItem  = sequelize.define('RentalItem', {
+const RentalItem = sequelize.define('RentalItem', {
     id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
     title: { type: DataTypes.STRING, allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
@@ -47,17 +47,12 @@ const Application = sequelize.define('Application', {
     RentalItemId: { type: DataTypes.INTEGER, allowNull: false },
 });
 
-Rent.hasMany(RentalItem, { as: 'Rent', foreignKey: 'RentId' });
-RentalItem.belongsTo(Rent, { as: 'Rent', foreignKey: 'RentId' });
+Rent.hasMany(RentalItem, { as: 'RentalItems', foreignKey: 'RentId' });
+RentalItem.belongsTo(Rent, { foreignKey: 'RentId' });
 
-RentalItem.hasMany(Application, { as: 'RentalItem', foreignKey: 'RentalItemId' });
-Application.belongsTo(RentalItem, { as: 'RentalItem', foreignKey: 'RentalItemId' });
+RentalItem.hasMany(Application, { as: 'Applications', foreignKey: 'RentalItemId' });
+Application.belongsTo(RentalItem, { foreignKey: 'RentalItemId' });
 
 module.exports = {
     User, Rent, RentalItem, Review, Application
 };
-
-
-
-
-

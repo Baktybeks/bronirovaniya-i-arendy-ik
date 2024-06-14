@@ -1,4 +1,4 @@
-const { Rent } = require('../models/models');
+const { Rent, RentalItem } = require('../models/models');
 const ApiError = require('../error/ApiError');
 const uuid = require('uuid');
 const path = require('path');
@@ -30,9 +30,23 @@ class RentController {
     async getOne(req, res) {
         try {
             const { id } = req.params;
-            const data = await Rent.findOne({ where: { id } });
-            return res.json(data);
-        } catch(error) {
+            console.log(`Fetching Rent with ID: ${id}`);
+            const rent = await Rent.findOne({
+                where: { id },
+                include: [
+                    {
+                        model: RentalItem,
+                        as: 'RentalItems'  // Используем правильный alias
+                    }
+                ]
+            });
+            if (!rent) {
+                console.log('Rent not found');
+                return res.status(404).json({ error: 'Rent not found' });
+            }
+            console.log('Rent found:', rent);
+            return res.json(rent);
+        } catch (error) {
             console.error('Error:', error);
             return res.status(500).json({ error: 'Internal Server Error' });
         }
