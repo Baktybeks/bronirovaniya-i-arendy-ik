@@ -311,6 +311,11 @@ const PageAdmin = () => {
                                        value={newRentItem.description} onChange={handleChangeRentItem}/>
                             </div>
                             <div className={styles.inputForm}>
+                                <label>Цена:</label>
+                                <input className={styles.input} placeholder='Цена' type="number" name="price"
+                                       value={newRentItem.price} onChange={handleChangeRentItem}/>
+                            </div>
+                            <div className={styles.inputForm}>
                                 <label>Дни от:</label>
                                 <input className={styles.input} placeholder='День от' type="number" name="dayFrom"
                                        value={newRentItem.dayFrom} onChange={handleChangeRentItem}/>
@@ -325,12 +330,13 @@ const PageAdmin = () => {
                                 <input className={styles.input} placeholder='Дней' type="text" name="day"
                                        value={newRentItem.day} onChange={handleChangeRentItem}/>
                             </div>
-                            <div className={styles.inputForm}>
-                                <label>Соединение с турами:</label>
-                                <input className={styles.input} placeholder='номер' type="number" name="RentId"
-                                       value={newRentItem.RentId} onChange={handleChangeRentItem}/>
-                            </div>
-
+                            <select name="RentId" value={newRentItem.RentId} onChange={handleChangeRentItem}>
+                                {rent.map(direction => (
+                                    <option key={direction.id} value={direction.id}>
+                                        {direction.address}
+                                    </option>
+                                ))}
+                            </select>
                             <button className={styles.summit} type="submit">Отправить</button>
                         </form>
                     </div>
@@ -356,7 +362,6 @@ const PageAdmin = () => {
                                            onChange={handleChangeReview}/>
                                 </div>
                             </div>
-
                             <button className={styles.summit} type="submit">Отправить</button>
                         </form>
                     </div>
