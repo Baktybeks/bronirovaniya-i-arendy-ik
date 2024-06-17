@@ -331,6 +331,7 @@ const PageAdmin = () => {
                                        value={newRentItem.day} onChange={handleChangeRentItem}/>
                             </div>
                             <select name="RentId" value={newRentItem.RentId} onChange={handleChangeRentItem}>
+                                <option>Название туров</option>
                                 {rent.map(direction => (
                                     <option key={direction.id} value={direction.id}>
                                         {direction.address}
