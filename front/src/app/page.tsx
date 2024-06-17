@@ -43,13 +43,6 @@ const Home: React.FC = () => {
 
 	return (
 		<Layout Header='home'>
-			<div
-				className={classNames(styles.shadow, { [styles.shadowNot]: !active })}
-				onClick={() => setActive(!active)}
-			></div>
-			<div className={classNames(styles.application, { [styles.applicationNot]: !active })}>
-				<TheAddAplication onActive={setActive} active={active} />
-			</div>
 			{!formData ? (
 				<div>
 					<p>Form data matches an item in the fetched data!</p>
