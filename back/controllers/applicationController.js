@@ -25,12 +25,12 @@ class ApplicationController {
                 {
                     model: RentalItem,
                     as: 'RentalItem',
-                    attributes: ['title', 'price', 'description', 'dayFrom', 'dayTo', 'day', 'RentId', 'image'],
+                    attributes: ['title', 'price', 'description', 'day', 'RentId', 'image'],
                     include: [
                         {
                             model: Rent,
                             as: 'Rent',
-                            attributes: ['address', 'price', 'image'],
+                            attributes: ['address', 'price', 'image', 'description', 'day'],
                         },
                     ]
                 }

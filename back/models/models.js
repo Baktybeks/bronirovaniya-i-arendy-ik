@@ -14,6 +14,8 @@ const Rent = sequelize.define('Rent', {
     image: { type: DataTypes.STRING, allowNull: false },
     address: { type: DataTypes.STRING, allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
+    description: { type: DataTypes.TEXT, allowNull: false },
+    day: { type: DataTypes.INTEGER, allowNull: false },
 });
 
 const RentalItem = sequelize.define('RentalItem', {
@@ -21,8 +23,6 @@ const RentalItem = sequelize.define('RentalItem', {
     title: { type: DataTypes.STRING, allowNull: false },
     price: { type: DataTypes.INTEGER, allowNull: false },
     description: { type: DataTypes.TEXT, allowNull: false },
-    dayFrom: { type: DataTypes.STRING, allowNull: false },
-    dayTo: { type: DataTypes.STRING, allowNull: false },
     day: { type: DataTypes.INTEGER, allowNull: false },
     RentId: { type: DataTypes.INTEGER, allowNull: false },
     image: { type: DataTypes.STRING, allowNull: false },

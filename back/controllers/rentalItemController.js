@@ -7,12 +7,12 @@ const path = require('path');
 class RentalItemController {
     async create(req, res, next) {
         try {
-            const { title, price, description, dayFrom, dayTo, day, RentId } = req.body;
+            const { title, price, description, day, RentId } = req.body;
             const { image } = req.files;
             let fileName = uuid.v4() + '.jpg';
             image.mv(path.resolve(__dirname, '..', 'static', fileName));
             const data = await RentalItem.create({
-                title, price, description, dayFrom, dayTo, day, RentId, image: fileName,
+                title, price, description, day, RentId, image: fileName,
             });
             return res.json(data);
         } catch(e) {
@@ -26,7 +26,7 @@ class RentalItemController {
                 {
                     model: Rent,
                     as: 'Rent',
-                    attributes: [ 'address', 'price', 'image' ],
+                    attributes: [ 'address', 'price', 'image', 'description', 'day' ],
                 },
             ]
         });

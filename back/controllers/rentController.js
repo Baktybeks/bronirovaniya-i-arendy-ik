@@ -7,7 +7,7 @@ const path = require('path');
 class RentController {
     async create(req, res, next) {
         try {
-            const { address, price } = req.body;
+            const { address, price, description, day } = req.body;
             const { image } = req.files;
             let fileName = uuid.v4() + '.jpg';
             image.mv(path.resolve(__dirname, '..', 'static', fileName));
@@ -15,7 +15,9 @@ class RentController {
                 address,
                 price,
                 image: fileName,
-            });
+                description,
+                day
+        });
             return res.json(data);
         } catch(e) {
             next(ApiError.badRequest(e.message));
