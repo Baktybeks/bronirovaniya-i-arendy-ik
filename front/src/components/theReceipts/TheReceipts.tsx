@@ -3,12 +3,12 @@
 import React, {useEffect, useRef, useState} from 'react'
 import Slider from 'react-slick'
 import ArrowRight from '@/components/theCriteria/icons/ArrowRight'
+import Nums from "@/components/theCriteria/icons/nums";
+import Link from "next/link";
 
 import 'slick-carousel/slick/slick.css'
 import './TheSlider.scss'
 import styles from './TheReceipts.module.scss'
-import Nums from "@/components/theCriteria/icons/nums";
-import Link from "next/link";
 
 const TheReceipts = () => {
     const [data, setData] = useState([])
