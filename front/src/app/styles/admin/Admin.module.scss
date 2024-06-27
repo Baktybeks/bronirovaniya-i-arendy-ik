@@ -193,6 +193,13 @@
   margin-top: 15px;
 }
 
+.day {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+  color: #36384E;
+}
+
 .imgesBooks {
   width: 212px;
   height: 330px;
@@ -266,4 +273,11 @@
 .imge {
   width: 200px;
   height: 200px;
+}
+
+.infoDay {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

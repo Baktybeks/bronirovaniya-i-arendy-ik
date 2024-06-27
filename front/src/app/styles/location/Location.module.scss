@@ -82,6 +82,13 @@
   cursor: pointer;
 }
 
+.day {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 30px;
+  color: #36384E;
+}
+
 .buttonPrev {
   transform: rotate(180deg);
 }
@@ -125,4 +132,11 @@
 
 .shadowNot,  .applicationNot{
   display: none;
+}
+
+.infoDay {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
 }

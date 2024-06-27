@@ -1,9 +1,9 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Nums from "@/components/theCriteria/icons/nums";
 import styles from "../styles/location/Location.module.scss";
-import { useSearchParams } from "next/navigation";
+import {useSearchParams} from "next/navigation";
 import Layout from "@/components/layout/Layout";
 import TheAddAplication from "@/components/theAddAplication/TheAddAplication";
 import classNames from "classnames";
@@ -57,12 +57,12 @@ const PageLocations = () => {
                                 />
                                 <div className={styles.textLocation}>
                                     <div className={styles.nameLocation}>{elem.title}</div>
-                                    <div className={styles.desk}>{elem.description}</div>
-                                    <div><Nums /></div>
-                                    <div className={styles.infoLocation}>
-                                        <div className={styles.renovationBook}>{elem.price} сом</div>
-                                        <div className={styles.prise}>{elem.day} дней</div>
+                                    <div><Nums/></div>
+                                    <div className={styles.infoDay}>
+                                        <div className={styles.prise}>{elem.price} сом</div>
+                                        <div className={styles.day}>{elem.day} дней</div>
                                     </div>
+                                    <div className={styles.desk}>{elem.description}</div>
                                 </div>
                             </div>
                         ))}

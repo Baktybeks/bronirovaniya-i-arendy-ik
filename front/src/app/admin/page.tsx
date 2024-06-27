@@ -10,6 +10,8 @@ interface Direction {
     address: string;
     price: string;
     image: string;
+    description: string;
+    day: string;
 }
 
 
@@ -20,6 +22,8 @@ const PageAdmin = () => {
         address: '',
         price: '',
         image: '',
+        description: "",
+        day: '',
     });
     const [review, setReview] = useState<Direction[]>([]);
     const [newReview, setNewReview] = useState<any>({
@@ -34,8 +38,6 @@ const PageAdmin = () => {
         title: "",
         price: "",
         description: "",
-        dayFrom: "",
-        dayTo: "",
         day: '',
         RentId: '',
         image: "",
@@ -163,6 +165,8 @@ const PageAdmin = () => {
             formData.append('address', newRent.address);
             formData.append('price', newRent.price);
             formData.append('image', newRent.image);
+            formData.append('description', newRent.description);
+            formData.append('day', newRent.day);
 
             const response = await fetch('http://localhost:5000/api/rent/', {
                 method: 'POST',
@@ -227,8 +231,6 @@ const PageAdmin = () => {
             formData.append('price', newRentItem.price);
             formData.append('image', newRentItem.image);
             formData.append('description', newRentItem.description);
-            formData.append('dayFrom', newRentItem.dayFrom);
-            formData.append('dayTo', newRentItem.dayTo);
             formData.append('day', newRentItem.day);
             formData.append('RentId', newRentItem.RentId);
 
@@ -270,6 +272,16 @@ const PageAdmin = () => {
                                 <label>Цена:</label>
                                 <input className={styles.input} placeholder='Цена' type="number" name="price"
                                        value={newRent.price} onChange={handleChange}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Текст:</label>
+                                <input className={styles.input} placeholder='Текст' type="text" name="description"
+                                       value={newRent.description} onChange={handleChange}/>
+                            </div>
+                            <div className={styles.inputForm}>
+                                <label>Дней:</label>
+                                <input className={styles.input} placeholder='Дней' type="text" name="day"
+                                       value={newRent.day} onChange={handleChange}/>
                             </div>
                             <div className={styles.inputForm}>
                                 <label>Картинка:</label>
@@ -314,16 +326,6 @@ const PageAdmin = () => {
                                 <label>Цена:</label>
                                 <input className={styles.input} placeholder='Цена' type="number" name="price"
                                        value={newRentItem.price} onChange={handleChangeRentItem}/>
-                            </div>
-                            <div className={styles.inputForm}>
-                                <label>Дни от:</label>
-                                <input className={styles.input} placeholder='День от' type="number" name="dayFrom"
-                                       value={newRentItem.dayFrom} onChange={handleChangeRentItem}/>
-                            </div>
-                            <div className={styles.inputForm}>
-                                <label>Дни до:</label>
-                                <input className={styles.input} placeholder='День до' type="text" name="dayTo"
-                                       value={newRentItem.dayTo} onChange={handleChangeRentItem}/>
                             </div>
                             <div className={styles.inputForm}>
                                 <label>Дней:</label>
@@ -378,8 +380,12 @@ const PageAdmin = () => {
                                          className={styles.imgesBooks}/>
                                     <div className={styles.textBooks}>
                                         <div className={styles.renovationBook}>{elem.address}</div>
+                                        <div className={styles.infoDay}>
                                         <div className={styles.prise}>{elem.price} сом</div>
+                                        <div className={styles.day}>{elem.day} дней</div>
+                                        </div>
                                     </div>
+                                    <p className={styles.renovationBook}>{elem.description}</p>
                                 </div>
                                 <button className={styles.delete} onClick={() => handleDelete(elem.id)}>Удалить</button>
                             </li>

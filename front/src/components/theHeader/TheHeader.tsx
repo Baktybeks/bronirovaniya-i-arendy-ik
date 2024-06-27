@@ -18,7 +18,7 @@ const TheHeader = () => {
 			<div className={styles.linck}>
 				{
 					session.data && (
-						session.data?.user?.name === 'admin' ? (
+						session.data?.user?.email === 'admin@mail.ru' ? (
 							<>
 								<Link className={styles.textLink}
 									  href='/admin'>Профиль</Link>

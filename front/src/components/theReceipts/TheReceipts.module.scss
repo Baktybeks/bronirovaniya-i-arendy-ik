@@ -17,6 +17,20 @@
     cursor: grab;
 }
 
+.day {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 30px;
+    color: #36384E;
+}
+
+.infoDay {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .nameLocation {
     font-size: 24px;
     font-weight: 600;

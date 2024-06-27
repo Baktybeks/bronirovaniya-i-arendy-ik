@@ -80,9 +80,12 @@ const TheReceipts = () => {
                                         <div className={styles.nameLocation}>{elem.address}</div>
                                         <div><Nums/></div>
                                         <div className={styles.infoLocation}>
-                                            <div className={styles.renovationBook}>{elem.price} сом</div>
-                                            <div className={styles.prise}>8 дней</div>
+                                            <div className={styles.infoDay}>
+                                                <div className={styles.prise}>{elem.price} сом</div>
+                                                <div className={styles.day}>{elem.day} дней</div>
+                                            </div>
                                         </div>
+                                        <p className={styles.renovationBook}>{elem.description}</p>
                                     </div>
                                 </Link>
                             ))}
